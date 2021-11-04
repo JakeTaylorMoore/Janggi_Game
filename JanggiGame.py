@@ -6,8 +6,6 @@
 #              each of the other classes run through. This project is the final project for
 #              CS 162 at Oregon State University.
 
-# Test
-
 ########
 
 
@@ -25,10 +23,14 @@ class JanggiGame:
         self._red_pieces, self._blue_pieces = self._board.get_list_of_pieces()
         self._red_team.set_pieces(self._red_pieces)
         self._blue_team.set_pieces(self._blue_pieces)
-        self._possible_moves_red = self._red_team.get_possible_moves(self._board)
-        self._possible_moves_blue = self._blue_team.get_possible_moves(self._board)
-        self._possible_moves_red_test = self._red_team.get_possible_moves_test(self._board)
-        self._possible_moves_blue_test = self._blue_team.get_possible_moves_test(self._board)
+        self._possible_moves_red = self._red_team.get_possible_moves(
+            self._board)
+        self._possible_moves_blue = self._blue_team.get_possible_moves(
+            self._board)
+        self._possible_moves_red_test = self._red_team.get_possible_moves_test(
+            self._board)
+        self._possible_moves_blue_test = self._blue_team.get_possible_moves_test(
+            self._board)
         self._legal_moves_red = []
         self._legal_moves_blue = []
 
@@ -85,7 +87,8 @@ class JanggiGame:
         # Letters list
         letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
         # Dictionary with letters and their corresponding numbers
-        letters_to_numbers = {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8, 'i': 9}
+        letters_to_numbers = {'a': 1, 'b': 2, 'c': 3,
+                              'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8, 'i': 9}
         # Create variable column_letter that is the 0 index of position variable
         column_letter = position[0]
         if column_letter in letters:
@@ -110,7 +113,8 @@ class JanggiGame:
         :return:
         """
         # Create dictionary with numbers and corresponding letters
-        numbers_to_letters = {1: 'a', 2: 'b', 3: 'c', 4: 'd', 5: 'e', 6: 'f', 7: 'g', 8: 'h', 9: 'i'}
+        numbers_to_letters = {1: 'a', 2: 'b', 3: 'c',
+                              4: 'd', 5: 'e', 6: 'f', 7: 'g', 8: 'h', 9: 'i'}
         # Check that numbers in range
         if column not in range(1, 10) or row not in range(1, 11):
             return False
@@ -127,8 +131,10 @@ class JanggiGame:
         Updates each teams' possible moves after a turn is made.
         :return:
         """
-        self._possible_moves_red = self._red_team.get_possible_moves(self._board)
-        self._possible_moves_blue = self._blue_team.get_possible_moves(self._board)
+        self._possible_moves_red = self._red_team.get_possible_moves(
+            self._board)
+        self._possible_moves_blue = self._blue_team.get_possible_moves(
+            self._board)
         return True
 
     def update_possible_moves_test(self):
@@ -136,8 +142,10 @@ class JanggiGame:
         Updates each teams' possible moves after a turn is made.
         :return:
         """
-        self._possible_moves_red_test = self._red_team.get_possible_moves_test(self._board)
-        self._possible_moves_blue_test = self._blue_team.get_possible_moves_test(self._board)
+        self._possible_moves_red_test = self._red_team.get_possible_moves_test(
+            self._board)
+        self._possible_moves_blue_test = self._blue_team.get_possible_moves_test(
+            self._board)
         return True
 
     def get_board(self):
@@ -212,7 +220,8 @@ class JanggiGame:
         self._board.get_board()[start_row][start_column].set_position(end_pos)
         # Set board at end_row, end_column to board at start_row, start_column
         hold_end_object = self._board.get_board()[end_row][end_column]
-        self._board.get_board()[end_row][end_column] = self._board.get_board()[start_row][start_column]
+        self._board.get_board()[end_row][end_column] = self._board.get_board()[
+            start_row][start_column]
         # Set board at start_row, start_column to empty_space
         empty_space = EmptySpace()
         self._board.get_board()[start_row][start_column] = empty_space
@@ -225,10 +234,12 @@ class JanggiGame:
             legal = True
 
         # Reversal of setting board
-        self._board.get_board()[start_row][start_column] = self._board.get_board()[end_row][end_column]
+        self._board.get_board()[start_row][start_column] = self._board.get_board()[
+            end_row][end_column]
         self._board.get_board()[end_row][end_column] = hold_end_object
         self._board.get_board()[end_row][end_column].set_position(end_pos)
-        self._board.get_board()[start_row][start_column].set_position(start_pos)
+        self._board.get_board()[
+            start_row][start_column].set_position(start_pos)
         self.update_possible_moves_test()
         return legal
 
@@ -538,7 +549,8 @@ class Board:
         :return:
         """
         print("_" * 80)
-        print('    |   A       B       C       D       E       F       G       H       I   ')
+        print(
+            '    |   A       B       C       D       E       F       G       H       I   ')
         print('  1 ', end='')
         row_count = 2
         for i in self._board:
@@ -613,7 +625,8 @@ class Team:
         """
         for piece in self._pieces:
             if piece.get_possible_moves(board) is not None:
-                self._possible_moves_for_testing.update(piece.get_possible_moves(board))
+                self._possible_moves_for_testing.update(
+                    piece.get_possible_moves(board))
 
         return self._possible_moves_for_testing
 
@@ -716,7 +729,8 @@ class Piece:
         self._position = position
         self._initials = ''
         self._empty = False
-        self._column_num, self._row_num = JanggiGame.get_numbers_from_position(position)
+        self._column_num, self._row_num = JanggiGame.get_numbers_from_position(
+            position)
 
     def __repr__(self):
         """
@@ -751,7 +765,8 @@ class Piece:
             self._column_num = None
             self._row_num = None
         else:
-            self._column_num, self._row_num = JanggiGame.get_numbers_from_position(new_position)
+            self._column_num, self._row_num = JanggiGame.get_numbers_from_position(
+                new_position)
         return True
 
     def get_position_numbers(self):
@@ -788,7 +803,8 @@ class Piece:
                 right_move = [self._column_num - 1, self._row_num]
                 forward_move = [self._column_num, self._row_num + 1]
                 backward_move = [self._column_num, self._row_num - 1]
-                test_moves = [left_move, right_move, forward_move, backward_move]
+                test_moves = [left_move, right_move,
+                              forward_move, backward_move]
                 if board.is_in_diagonal_space(self.get_position()):
                     diagonal_right = [self._column_num - 1, self._row_num + 1]
                     diagonal_left = [self._column_num + 1, self._row_num + 1]
@@ -819,7 +835,8 @@ class Piece:
                 right_move = [self._column_num + 1, self._row_num]
                 forward_move = [self._column_num, self._row_num - 1]
                 backward_move = [self._column_num, self._row_num + 1]
-                test_moves = [left_move, right_move, forward_move, backward_move]
+                test_moves = [left_move, right_move,
+                              forward_move, backward_move]
                 if board.is_in_diagonal_space(self.get_position()):
                     diagonal_right = [self._column_num + 1, self._row_num + 1]
                     diagonal_left = [self._column_num - 1, self._row_num + 1]
@@ -920,25 +937,31 @@ class Horse(Piece):
             # Also set variables to alpha numeric positions
             if self.get_team_color() == 'r':
                 left_move = [self._column_num + 1, self._row_num]
-                left_move_alpha = JanggiGame.get_position_from_numbers(left_move[0], left_move[1])
+                left_move_alpha = JanggiGame.get_position_from_numbers(
+                    left_move[0], left_move[1])
                 right_move = [self._column_num - 1, self._row_num]
-                right_move_alpha = JanggiGame.get_position_from_numbers(right_move[0], right_move[1])
+                right_move_alpha = JanggiGame.get_position_from_numbers(
+                    right_move[0], right_move[1])
                 forward_move = [self._column_num, self._row_num + 1]
-                forward_move_alpha = JanggiGame.get_position_from_numbers(forward_move[0], forward_move[1])
+                forward_move_alpha = JanggiGame.get_position_from_numbers(
+                    forward_move[0], forward_move[1])
                 backward_move = [self._column_num, self._row_num - 1]
-                backward_move_alpha = JanggiGame.get_position_from_numbers(backward_move[0], backward_move[1])
+                backward_move_alpha = JanggiGame.get_position_from_numbers(
+                    backward_move[0], backward_move[1])
                 # If position is empty and position is on board, check diagonals.
                 if left_move_alpha:
                     if board.is_empty(left_move_alpha):
                         # Variables for diagonals and alpha numeric positions
                         left_up = [left_move[0] + 1, left_move[1] + 1]
-                        left_up_alpha = JanggiGame.get_position_from_numbers(left_up[0], left_up[1])
+                        left_up_alpha = JanggiGame.get_position_from_numbers(
+                            left_up[0], left_up[1])
                         # If end position is empty and on board, append to legal moves list
                         if left_up_alpha:
                             if board.get_position_team(left_up_alpha) != 'r':
                                 legal_moves.append(left_up_alpha)
                         left_down = [left_move[0] + 1, left_move[1] - 1]
-                        left_down_alpha = JanggiGame.get_position_from_numbers(left_down[0], left_down[1])
+                        left_down_alpha = JanggiGame.get_position_from_numbers(
+                            left_down[0], left_down[1])
                         # If end position is empty and on board, append to legal moves list
                         if left_down_alpha:
                             if board.get_position_team(left_down_alpha) != 'r':
@@ -947,13 +970,15 @@ class Horse(Piece):
                     if board.is_empty(right_move_alpha):
                         # Variables for diagonals and alpha numeric positions
                         right_up = [right_move[0] - 1, right_move[1] + 1]
-                        right_up_alpha = JanggiGame.get_position_from_numbers(right_up[0], right_up[1])
+                        right_up_alpha = JanggiGame.get_position_from_numbers(
+                            right_up[0], right_up[1])
                         # If end position is empty and on board, append to legal moves list
                         if right_up_alpha:
                             if board.get_position_team(right_up_alpha) != 'r':
                                 legal_moves.append(right_up_alpha)
                         right_down = [right_move[0] - 1, right_move[1] - 1]
-                        right_down_alpha = JanggiGame.get_position_from_numbers(right_down[0], right_down[1])
+                        right_down_alpha = JanggiGame.get_position_from_numbers(
+                            right_down[0], right_down[1])
                         if right_down_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.get_position_team(right_down_alpha) != 'r':
@@ -961,14 +986,18 @@ class Horse(Piece):
                 if forward_move_alpha:
                     if board.is_empty(forward_move_alpha):
                         # Variables for diagonals and alpha numeric positions
-                        forward_left = [forward_move[0] + 1, forward_move[1] + 1]
-                        forward_left_alpha = JanggiGame.get_position_from_numbers(forward_left[0], forward_left[1])
+                        forward_left = [
+                            forward_move[0] + 1, forward_move[1] + 1]
+                        forward_left_alpha = JanggiGame.get_position_from_numbers(
+                            forward_left[0], forward_left[1])
                         if forward_left_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.get_position_team(forward_left_alpha) != 'r':
                                 legal_moves.append(forward_left_alpha)
-                        forward_right = [forward_move[0] - 1, forward_move[1] + 1]
-                        forward_right_alpha = JanggiGame.get_position_from_numbers(forward_right[0], forward_right[1])
+                        forward_right = [
+                            forward_move[0] - 1, forward_move[1] + 1]
+                        forward_right_alpha = JanggiGame.get_position_from_numbers(
+                            forward_right[0], forward_right[1])
                         if forward_right_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.get_position_team(forward_right_alpha) != 'r':
@@ -976,13 +1005,16 @@ class Horse(Piece):
                 if backward_move_alpha:
                     if board.is_empty(backward_move_alpha):
                         # Variables for diagonals and alpha numeric positions
-                        backward_left = [backward_move[0] + 1, backward_move[1] - 1]
-                        backward_left_alpha = JanggiGame.get_position_from_numbers(backward_left[0], backward_left[1])
+                        backward_left = [
+                            backward_move[0] + 1, backward_move[1] - 1]
+                        backward_left_alpha = JanggiGame.get_position_from_numbers(
+                            backward_left[0], backward_left[1])
                         if backward_left_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.get_position_team(backward_left_alpha) != 'r':
                                 legal_moves.append(backward_left_alpha)
-                        backward_right = [backward_move[0] - 1, backward_move[1] - 1]
+                        backward_right = [
+                            backward_move[0] - 1, backward_move[1] - 1]
                         backward_right_alpha = JanggiGame.get_position_from_numbers(backward_right[0],
                                                                                     backward_right[1])
                         if backward_right_alpha:
@@ -993,25 +1025,31 @@ class Horse(Piece):
             # Moves one space forward, sideways, or backwards and then one space diagonally
             if self.get_team_color() == 'b':
                 left_move = [self._column_num - 1, self._row_num]
-                left_move_alpha = JanggiGame.get_position_from_numbers(left_move[0], left_move[1])
+                left_move_alpha = JanggiGame.get_position_from_numbers(
+                    left_move[0], left_move[1])
                 right_move = [self._column_num + 1, self._row_num]
-                right_move_alpha = JanggiGame.get_position_from_numbers(right_move[0], right_move[1])
+                right_move_alpha = JanggiGame.get_position_from_numbers(
+                    right_move[0], right_move[1])
                 forward_move = [self._column_num, self._row_num - 1]
-                forward_move_alpha = JanggiGame.get_position_from_numbers(forward_move[0], forward_move[1])
+                forward_move_alpha = JanggiGame.get_position_from_numbers(
+                    forward_move[0], forward_move[1])
                 backward_move = [self._column_num, self._row_num + 1]
-                backward_move_alpha = JanggiGame.get_position_from_numbers(backward_move[0], backward_move[1])
+                backward_move_alpha = JanggiGame.get_position_from_numbers(
+                    backward_move[0], backward_move[1])
                 if left_move_alpha:
                     # If position is empty and position is on board, check diagonals.
                     if board.is_empty(left_move_alpha):
                         # Variables for diagonals and alpha numeric positions
                         left_up = [left_move[0] - 1, left_move[1] - 1]
-                        left_up_alpha = JanggiGame.get_position_from_numbers(left_up[0], left_up[1])
+                        left_up_alpha = JanggiGame.get_position_from_numbers(
+                            left_up[0], left_up[1])
                         if left_up_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.get_position_team(left_up_alpha) != 'b':
                                 legal_moves.append(left_up_alpha)
                         left_down = [left_move[0] - 1, left_move[1] + 1]
-                        left_down_alpha = JanggiGame.get_position_from_numbers(left_down[0], left_down[1])
+                        left_down_alpha = JanggiGame.get_position_from_numbers(
+                            left_down[0], left_down[1])
                         if left_down_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.get_position_team(left_down_alpha) != 'b':
@@ -1020,13 +1058,15 @@ class Horse(Piece):
                     if board.is_empty(right_move_alpha):
                         # Variables for diagonals and alpha numeric positions
                         right_up = [right_move[0] + 1, right_move[1] - 1]
-                        right_up_alpha = JanggiGame.get_position_from_numbers(right_up[0], right_up[1])
+                        right_up_alpha = JanggiGame.get_position_from_numbers(
+                            right_up[0], right_up[1])
                         if right_up_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.get_position_team(right_up_alpha) != 'b':
                                 legal_moves.append(right_up_alpha)
                         right_down = [right_move[0] + 1, right_move[1] + 1]
-                        right_down_alpha = JanggiGame.get_position_from_numbers(right_down[0], right_down[1])
+                        right_down_alpha = JanggiGame.get_position_from_numbers(
+                            right_down[0], right_down[1])
                         if right_down_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.get_position_team(right_down_alpha) != 'b':
@@ -1034,14 +1074,18 @@ class Horse(Piece):
                 if forward_move_alpha:
                     if board.is_empty(forward_move_alpha):
                         # Variables for diagonals and alpha numeric positions
-                        forward_left = [forward_move[0] - 1, forward_move[1] - 1]
-                        forward_left_alpha = JanggiGame.get_position_from_numbers(forward_left[0], forward_left[1])
+                        forward_left = [
+                            forward_move[0] - 1, forward_move[1] - 1]
+                        forward_left_alpha = JanggiGame.get_position_from_numbers(
+                            forward_left[0], forward_left[1])
                         if forward_left_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.get_position_team(forward_left_alpha) != 'b':
                                 legal_moves.append(forward_left_alpha)
-                        forward_right = [forward_move[0] + 1, forward_move[1] - 1]
-                        forward_right_alpha = JanggiGame.get_position_from_numbers(forward_right[0], forward_right[1])
+                        forward_right = [
+                            forward_move[0] + 1, forward_move[1] - 1]
+                        forward_right_alpha = JanggiGame.get_position_from_numbers(
+                            forward_right[0], forward_right[1])
                         if forward_right_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.get_position_team(forward_right_alpha) != 'b':
@@ -1049,13 +1093,16 @@ class Horse(Piece):
                 if backward_move_alpha:
                     if board.is_empty(backward_move_alpha):
                         # Variables for diagonals and alpha numeric positions
-                        backward_left = [backward_move[0] - 1, backward_move[1] + 1]
-                        backward_left_alpha = JanggiGame.get_position_from_numbers(backward_left[0], backward_left[1])
+                        backward_left = [
+                            backward_move[0] - 1, backward_move[1] + 1]
+                        backward_left_alpha = JanggiGame.get_position_from_numbers(
+                            backward_left[0], backward_left[1])
                         if backward_left_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.get_position_team(backward_left_alpha) != 'b':
                                 legal_moves.append(backward_left_alpha)
-                        backward_right = [backward_move[0] + 1, backward_move[1] + 1]
+                        backward_right = [
+                            backward_move[0] + 1, backward_move[1] + 1]
                         backward_right_alpha = JanggiGame.get_position_from_numbers(backward_right[0],
                                                                                     backward_right[1])
                         if backward_right_alpha:
@@ -1102,24 +1149,30 @@ class Elephant(Piece):
             # Also set variables to alpha numeric positions
             if self.get_team_color() == 'r':
                 left_move = [self._column_num + 1, self._row_num]
-                left_move_alpha = JanggiGame.get_position_from_numbers(left_move[0], left_move[1])
+                left_move_alpha = JanggiGame.get_position_from_numbers(
+                    left_move[0], left_move[1])
                 right_move = [self._column_num - 1, self._row_num]
-                right_move_alpha = JanggiGame.get_position_from_numbers(right_move[0], right_move[1])
+                right_move_alpha = JanggiGame.get_position_from_numbers(
+                    right_move[0], right_move[1])
                 forward_move = [self._column_num, self._row_num + 1]
-                forward_move_alpha = JanggiGame.get_position_from_numbers(forward_move[0], forward_move[1])
+                forward_move_alpha = JanggiGame.get_position_from_numbers(
+                    forward_move[0], forward_move[1])
                 backward_move = [self._column_num, self._row_num - 1]
-                backward_move_alpha = JanggiGame.get_position_from_numbers(backward_move[0], backward_move[1])
+                backward_move_alpha = JanggiGame.get_position_from_numbers(
+                    backward_move[0], backward_move[1])
                 if left_move_alpha:
                     # If position is empty and position is on board, check diagonals.
                     if board.is_empty(left_move_alpha):
                         # Variables for diagonals and alpha numeric positions
                         left_up = [left_move[0] + 1, left_move[1] + 1]
-                        left_up_alpha = JanggiGame.get_position_from_numbers(left_up[0], left_up[1])
+                        left_up_alpha = JanggiGame.get_position_from_numbers(
+                            left_up[0], left_up[1])
                         if left_up_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.is_empty(left_up_alpha):
                                 # Variables for diagonals and alpha numeric positions
-                                left_up_again = [left_up[0] + 1, left_up[1] + 1]
+                                left_up_again = [
+                                    left_up[0] + 1, left_up[1] + 1]
                                 left_up_again_alpha = JanggiGame.get_position_from_numbers(left_up_again[0],
                                                                                            left_up_again[1])
                                 if left_up_again_alpha:
@@ -1127,119 +1180,149 @@ class Elephant(Piece):
                                     if board.get_position_team(left_up_again_alpha) != 'r':
                                         legal_moves.append(left_up_again_alpha)
                         left_down = [left_move[0] + 1, left_move[1] - 1]
-                        left_down_alpha = JanggiGame.get_position_from_numbers(left_down[0], left_down[1])
+                        left_down_alpha = JanggiGame.get_position_from_numbers(
+                            left_down[0], left_down[1])
                         if left_down_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.is_empty(left_down_alpha):
                                 # Variables for diagonals and alpha numeric positions
-                                left_down_again = [left_down[0] + 1, left_down[1] - 1]
+                                left_down_again = [
+                                    left_down[0] + 1, left_down[1] - 1]
                                 left_down_again_alpha = JanggiGame.get_position_from_numbers(left_down_again[0],
                                                                                              left_down_again[1])
                                 if left_down_again_alpha:
                                     # If end position is empty and on board, append to legal moves list
                                     if board.get_position_team(left_down_again_alpha) != 'r':
-                                        legal_moves.append(left_down_again_alpha)
+                                        legal_moves.append(
+                                            left_down_again_alpha)
                 if right_move_alpha:
                     if board.is_empty(right_move_alpha):
                         # Variables for diagonals and alpha numeric positions
                         right_up = [right_move[0] - 1, right_move[1] + 1]
-                        right_up_alpha = JanggiGame.get_position_from_numbers(right_up[0], right_up[1])
+                        right_up_alpha = JanggiGame.get_position_from_numbers(
+                            right_up[0], right_up[1])
                         if right_up_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.is_empty(right_up_alpha):
-                                right_up_again = [right_up[0] - 1, right_up[1] + 1]
+                                right_up_again = [
+                                    right_up[0] - 1, right_up[1] + 1]
                                 right_up_again_alpha = JanggiGame.get_position_from_numbers(right_up_again[0],
                                                                                             right_up_again[1])
                                 if right_up_again_alpha:
                                     if board.get_position_team(right_up_again_alpha) != 'r':
-                                        legal_moves.append(right_up_again_alpha)
+                                        legal_moves.append(
+                                            right_up_again_alpha)
                         right_down = [right_move[0] - 1, right_move[1] - 1]
-                        right_down_alpha = JanggiGame.get_position_from_numbers(right_down[0], right_down[1])
+                        right_down_alpha = JanggiGame.get_position_from_numbers(
+                            right_down[0], right_down[1])
                         # If end position is empty and on board, append to legal moves list
                         if right_down_alpha:
                             if board.is_empty(right_down_alpha):
-                                right_down_again = [right_down[0] - 1, right_down[1] - 1]
+                                right_down_again = [
+                                    right_down[0] - 1, right_down[1] - 1]
                                 right_down_again_alpha = JanggiGame.get_position_from_numbers(right_down_again[0],
                                                                                               right_down_again[1])
                                 if right_down_again_alpha:
                                     if board.get_position_team(right_down_again_alpha) != 'r':
-                                        legal_moves.append(right_down_again_alpha)
+                                        legal_moves.append(
+                                            right_down_again_alpha)
                 if forward_move_alpha:
                     if board.is_empty(forward_move_alpha):
                         # Variables for diagonals and alpha numeric positions
-                        forward_left = [forward_move[0] + 1, forward_move[1] + 1]
-                        forward_left_alpha = JanggiGame.get_position_from_numbers(forward_left[0], forward_left[1])
+                        forward_left = [
+                            forward_move[0] + 1, forward_move[1] + 1]
+                        forward_left_alpha = JanggiGame.get_position_from_numbers(
+                            forward_left[0], forward_left[1])
                         if forward_left_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.is_empty(forward_left_alpha):
-                                forward_left_again = [forward_left[0] + 1, forward_left[1] + 1]
+                                forward_left_again = [
+                                    forward_left[0] + 1, forward_left[1] + 1]
                                 forward_left_again_alpha = JanggiGame.get_position_from_numbers(forward_left_again[0],
                                                                                                 forward_left_again[1])
                                 if forward_left_again_alpha:
                                     if board.get_position_team(forward_left_again_alpha) != 'r':
-                                        legal_moves.append(forward_left_again_alpha)
-                        forward_right = [forward_move[0] - 1, forward_move[1] + 1]
-                        forward_right_alpha = JanggiGame.get_position_from_numbers(forward_right[0], forward_right[1])
+                                        legal_moves.append(
+                                            forward_left_again_alpha)
+                        forward_right = [
+                            forward_move[0] - 1, forward_move[1] + 1]
+                        forward_right_alpha = JanggiGame.get_position_from_numbers(
+                            forward_right[0], forward_right[1])
                         if forward_right_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.is_empty(forward_right_alpha):
-                                forward_right_again = [forward_right[0] - 1, forward_right[1] + 1]
+                                forward_right_again = [
+                                    forward_right[0] - 1, forward_right[1] + 1]
                                 forward_right_again_alpha = JanggiGame.get_position_from_numbers(forward_right_again[0],
                                                                                                  forward_right_again[1])
                                 if forward_right_again_alpha:
                                     if board.get_position_team(forward_right_again_alpha) != 'r':
-                                        legal_moves.append(forward_right_again_alpha)
+                                        legal_moves.append(
+                                            forward_right_again_alpha)
                 if backward_move_alpha:
                     if board.is_empty(backward_move_alpha):
                         # Variables for diagonals and alpha numeric positions
-                        backward_left = [backward_move[0] + 1, backward_move[1] - 1]
-                        backward_left_alpha = JanggiGame.get_position_from_numbers(backward_left[0], backward_left[1])
+                        backward_left = [
+                            backward_move[0] + 1, backward_move[1] - 1]
+                        backward_left_alpha = JanggiGame.get_position_from_numbers(
+                            backward_left[0], backward_left[1])
                         if backward_left_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.is_empty(backward_left_alpha):
-                                backward_left_again = [backward_left[0] + 1, backward_left[1] - 1]
+                                backward_left_again = [
+                                    backward_left[0] + 1, backward_left[1] - 1]
                                 backward_left_again_alpha = JanggiGame.get_position_from_numbers(backward_left_again[0],
                                                                                                  backward_left_again[1])
                                 if backward_left_again_alpha:
                                     # If end position is empty and on board, append to legal moves list
                                     if board.get_position_team(backward_left_again_alpha) != 'r':
-                                        legal_moves.append(backward_left_again_alpha)
-                        backward_right = [backward_move[0] - 1, backward_move[1] - 1]
+                                        legal_moves.append(
+                                            backward_left_again_alpha)
+                        backward_right = [
+                            backward_move[0] - 1, backward_move[1] - 1]
                         backward_right_alpha = JanggiGame.get_position_from_numbers(backward_right[0],
                                                                                     backward_right[1])
                         if backward_right_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.is_empty(backward_right_alpha):
-                                backward_right_again = [backward_right[0] - 1, backward_right[1] - 1]
+                                backward_right_again = [
+                                    backward_right[0] - 1, backward_right[1] - 1]
                                 backward_right_again_alpha = JanggiGame.get_position_from_numbers(
                                     backward_right_again[0], backward_right_again[1])
                                 if backward_right_again_alpha:
                                     # If end position is empty and on board, append to legal moves list
                                     if board.get_position_team(backward_right_again_alpha) != 'r':
-                                        legal_moves.append(backward_right_again_alpha)
+                                        legal_moves.append(
+                                            backward_right_again_alpha)
 
             # Moves one space forward, sideways, or backwards and then two spaces diagonally
             # Also set variables to alpha numeric positions
             if self.get_team_color() == 'b':
                 left_move = [self._column_num - 1, self._row_num]
-                left_move_alpha = JanggiGame.get_position_from_numbers(left_move[0], left_move[1])
+                left_move_alpha = JanggiGame.get_position_from_numbers(
+                    left_move[0], left_move[1])
                 right_move = [self._column_num + 1, self._row_num]
-                right_move_alpha = JanggiGame.get_position_from_numbers(right_move[0], right_move[1])
+                right_move_alpha = JanggiGame.get_position_from_numbers(
+                    right_move[0], right_move[1])
                 forward_move = [self._column_num, self._row_num - 1]
-                forward_move_alpha = JanggiGame.get_position_from_numbers(forward_move[0], forward_move[1])
+                forward_move_alpha = JanggiGame.get_position_from_numbers(
+                    forward_move[0], forward_move[1])
                 backward_move = [self._column_num, self._row_num + 1]
-                backward_move_alpha = JanggiGame.get_position_from_numbers(backward_move[0], backward_move[1])
+                backward_move_alpha = JanggiGame.get_position_from_numbers(
+                    backward_move[0], backward_move[1])
                 if left_move_alpha:
                     # If position is empty and position is on board, check diagonals.
                     if board.is_empty(left_move_alpha):
                         # Variables for diagonals and alpha numeric positions
                         left_up = [left_move[0] - 1, left_move[1] - 1]
-                        left_up_alpha = JanggiGame.get_position_from_numbers(left_up[0], left_up[1])
+                        left_up_alpha = JanggiGame.get_position_from_numbers(
+                            left_up[0], left_up[1])
                         if left_up_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.is_empty(left_up_alpha):
                                 # Variables for diagonals and alpha numeric positions
-                                left_up_again = [left_up[0] - 1, left_up[1] - 1]
+                                left_up_again = [
+                                    left_up[0] - 1, left_up[1] - 1]
                                 left_up_again_alpha = JanggiGame.get_position_from_numbers(left_up_again[0],
                                                                                            left_up_again[1])
                                 if left_up_again_alpha:
@@ -1247,96 +1330,120 @@ class Elephant(Piece):
                                     if board.get_position_team(left_up_again_alpha) != 'b':
                                         legal_moves.append(left_up_again_alpha)
                         left_down = [left_move[0] - 1, left_move[1] + 1]
-                        left_down_alpha = JanggiGame.get_position_from_numbers(left_down[0], left_down[1])
+                        left_down_alpha = JanggiGame.get_position_from_numbers(
+                            left_down[0], left_down[1])
                         if left_down_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.is_empty(left_down_alpha):
                                 # Variables for diagonals and alpha numeric positions
-                                left_down_again = [left_down[0] - 1, left_down[1] + 1]
+                                left_down_again = [
+                                    left_down[0] - 1, left_down[1] + 1]
                                 left_down_again_alpha = JanggiGame.get_position_from_numbers(left_down_again[0],
                                                                                              left_down_again[1])
                                 if left_down_again_alpha:
                                     # If end position is empty and on board, append to legal moves list
                                     if board.get_position_team(left_down_again_alpha) != 'b':
-                                        legal_moves.append(left_down_again_alpha)
+                                        legal_moves.append(
+                                            left_down_again_alpha)
                 if right_move_alpha:
                     if board.is_empty(right_move_alpha):
                         # Variables for diagonals and alpha numeric positions
                         right_up = [right_move[0] + 1, right_move[1] - 1]
-                        right_up_alpha = JanggiGame.get_position_from_numbers(right_up[0], right_up[1])
+                        right_up_alpha = JanggiGame.get_position_from_numbers(
+                            right_up[0], right_up[1])
                         if right_up_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.is_empty(right_up_alpha):
-                                right_up_again = [right_up[0] + 1, right_up[1] - 1]
+                                right_up_again = [
+                                    right_up[0] + 1, right_up[1] - 1]
                                 right_up_again_alpha = JanggiGame.get_position_from_numbers(right_up_again[0],
                                                                                             right_up_again[1])
                                 if right_up_again_alpha:
                                     if board.get_position_team(right_up_again_alpha) != 'b':
-                                        legal_moves.append(right_up_again_alpha)
+                                        legal_moves.append(
+                                            right_up_again_alpha)
                         right_down = [right_move[0] + 1, right_move[1] + 1]
-                        right_down_alpha = JanggiGame.get_position_from_numbers(right_down[0], right_down[1])
+                        right_down_alpha = JanggiGame.get_position_from_numbers(
+                            right_down[0], right_down[1])
                         # If end position is empty and on board, append to legal moves list
                         if right_down_alpha:
                             if board.is_empty(right_down_alpha):
-                                right_down_again = [right_down[0] + 1, right_down[1] + 1]
+                                right_down_again = [
+                                    right_down[0] + 1, right_down[1] + 1]
                                 right_down_again_alpha = JanggiGame.get_position_from_numbers(right_down_again[0],
                                                                                               right_down_again[1])
                                 if right_down_again_alpha:
                                     if board.get_position_team(right_down_again_alpha) != 'b':
-                                        legal_moves.append(right_down_again_alpha)
+                                        legal_moves.append(
+                                            right_down_again_alpha)
                 if forward_move_alpha:
                     if board.is_empty(forward_move_alpha):
                         # Variables for diagonals and alpha numeric positions
-                        forward_left = [forward_move[0] - 1, forward_move[1] - 1]
-                        forward_left_alpha = JanggiGame.get_position_from_numbers(forward_left[0], forward_left[1])
+                        forward_left = [
+                            forward_move[0] - 1, forward_move[1] - 1]
+                        forward_left_alpha = JanggiGame.get_position_from_numbers(
+                            forward_left[0], forward_left[1])
                         if forward_left_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.is_empty(forward_left_alpha):
-                                forward_left_again = [forward_left[0] - 1, forward_left[1] - 1]
+                                forward_left_again = [
+                                    forward_left[0] - 1, forward_left[1] - 1]
                                 forward_left_again_alpha = JanggiGame.get_position_from_numbers(forward_left_again[0],
                                                                                                 forward_left_again[1])
                                 if forward_left_again_alpha:
                                     if board.get_position_team(forward_left_again_alpha) != 'b':
-                                        legal_moves.append(forward_left_again_alpha)
-                        forward_right = [forward_move[0] + 1, forward_move[1] - 1]
-                        forward_right_alpha = JanggiGame.get_position_from_numbers(forward_right[0], forward_right[1])
+                                        legal_moves.append(
+                                            forward_left_again_alpha)
+                        forward_right = [
+                            forward_move[0] + 1, forward_move[1] - 1]
+                        forward_right_alpha = JanggiGame.get_position_from_numbers(
+                            forward_right[0], forward_right[1])
                         if forward_right_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.is_empty(forward_right_alpha):
-                                forward_right_again = [forward_right[0] + 1, forward_right[1] - 1]
+                                forward_right_again = [
+                                    forward_right[0] + 1, forward_right[1] - 1]
                                 forward_right_again_alpha = JanggiGame.get_position_from_numbers(forward_right_again[0],
                                                                                                  forward_right_again[1])
                                 if forward_right_again_alpha:
                                     if board.get_position_team(forward_right_again_alpha) != 'b':
-                                        legal_moves.append(forward_right_again_alpha)
+                                        legal_moves.append(
+                                            forward_right_again_alpha)
                 if backward_move_alpha:
                     if board.is_empty(backward_move_alpha):
                         # Variables for diagonals and alpha numeric positions
-                        backward_left = [backward_move[0] - 1, backward_move[1] + 1]
-                        backward_left_alpha = JanggiGame.get_position_from_numbers(backward_left[0], backward_left[1])
+                        backward_left = [
+                            backward_move[0] - 1, backward_move[1] + 1]
+                        backward_left_alpha = JanggiGame.get_position_from_numbers(
+                            backward_left[0], backward_left[1])
                         if backward_left_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.is_empty(backward_left_alpha):
-                                backward_left_again = [backward_left[0] - 1, backward_left[1] + 1]
+                                backward_left_again = [
+                                    backward_left[0] - 1, backward_left[1] + 1]
                                 backward_left_again_alpha = JanggiGame.get_position_from_numbers(backward_left_again[0],
                                                                                                  backward_left_again[1])
                                 if backward_left_again_alpha:
                                     # If end position is empty and on board, append to legal moves list
                                     if board.get_position_team(backward_left_again_alpha) != 'b':
-                                        legal_moves.append(backward_left_again_alpha)
-                        backward_right = [backward_move[0] + 1, backward_move[1] + 1]
+                                        legal_moves.append(
+                                            backward_left_again_alpha)
+                        backward_right = [
+                            backward_move[0] + 1, backward_move[1] + 1]
                         backward_right_alpha = JanggiGame.get_position_from_numbers(backward_right[0],
                                                                                     backward_right[1])
                         if backward_right_alpha:
                             # If end position is empty and on board, append to legal moves list
                             if board.is_empty(backward_right_alpha):
-                                backward_right_again = [backward_right[0] + 1, backward_right[1] + 1]
+                                backward_right_again = [
+                                    backward_right[0] + 1, backward_right[1] + 1]
                                 backward_right_again_alpha = JanggiGame.get_position_from_numbers(
                                     backward_right_again[0], backward_right_again[1])
                                 if backward_right_again_alpha:
                                     # If end position is empty and on board, append to legal moves list
                                     if board.get_position_team(backward_right_again_alpha) != 'b':
-                                        legal_moves.append(backward_right_again_alpha)
+                                        legal_moves.append(
+                                            backward_right_again_alpha)
 
             # Append start position to list and create dictionary with key as start position
             legal_moves.append(self.get_position())
@@ -1370,26 +1477,34 @@ class Chariot(Piece):
             # Also set variables to alpha numeric positions
             if self.get_team_color() == 'r':
                 left_move = [self._column_num + 1, self._row_num]
-                left_move_alpha = JanggiGame.get_position_from_numbers(left_move[0], left_move[1])
+                left_move_alpha = JanggiGame.get_position_from_numbers(
+                    left_move[0], left_move[1])
                 right_move = [self._column_num - 1, self._row_num]
-                right_move_alpha = JanggiGame.get_position_from_numbers(right_move[0], right_move[1])
+                right_move_alpha = JanggiGame.get_position_from_numbers(
+                    right_move[0], right_move[1])
                 forward_move = [self._column_num, self._row_num + 1]
-                forward_move_alpha = JanggiGame.get_position_from_numbers(forward_move[0], forward_move[1])
+                forward_move_alpha = JanggiGame.get_position_from_numbers(
+                    forward_move[0], forward_move[1])
                 backward_move = [self._column_num, self._row_num - 1]
-                backward_move_alpha = JanggiGame.get_position_from_numbers(backward_move[0], backward_move[1])
+                backward_move_alpha = JanggiGame.get_position_from_numbers(
+                    backward_move[0], backward_move[1])
 
                 if is_in_diagonal_spaces:
                     # If it is in diagonal spaces, create variables forward_right, backward_right,
                     # backward_left, forward_left (and alpha versions) that are the current position plus
                     # or minus numbers that would take it diagonally that direction
                     forward_right = [self._column_num - 1, self._row_num + 1]
-                    forward_right_alpha = JanggiGame.get_position_from_numbers(forward_right[0], forward_right[1])
+                    forward_right_alpha = JanggiGame.get_position_from_numbers(
+                        forward_right[0], forward_right[1])
                     backward_right = [self._column_num - 1, self._row_num - 1]
-                    backward_right_alpha = JanggiGame.get_position_from_numbers(backward_right[0], backward_right[1])
+                    backward_right_alpha = JanggiGame.get_position_from_numbers(
+                        backward_right[0], backward_right[1])
                     backward_left = [self._column_num + 1, self._row_num - 1]
-                    backward_left_alpha = JanggiGame.get_position_from_numbers(backward_left[0], backward_left[1])
+                    backward_left_alpha = JanggiGame.get_position_from_numbers(
+                        backward_left[0], backward_left[1])
                     forward_left = [self._column_num + 1, self._row_num + 1]
-                    forward_left_alpha = JanggiGame.get_position_from_numbers(forward_left[0], forward_left[1])
+                    forward_left_alpha = JanggiGame.get_position_from_numbers(
+                        forward_left[0], forward_left[1])
 
                     # while forward right and while forward right alpha is in palace
                     while forward_right_alpha and board.is_in_palace(forward_right_alpha):
@@ -1397,7 +1512,8 @@ class Chariot(Piece):
                         if board.is_empty(forward_right_alpha):
                             # If empty, append position and add iteration of move
                             legal_moves.append(forward_right_alpha)
-                            forward_right = [forward_right[0] - 1, forward_right[1] + 1]
+                            forward_right = [
+                                forward_right[0] - 1, forward_right[1] + 1]
                             forward_right_alpha = JanggiGame.get_position_from_numbers(forward_right[0],
                                                                                        forward_right[1])
                         # If not check if it is the same team as piece
@@ -1415,7 +1531,8 @@ class Chariot(Piece):
                         if board.is_empty(backward_right_alpha):
                             # If empty, append position and add iteration of move
                             legal_moves.append(backward_right_alpha)
-                            backward_right = [backward_right[0] - 1, backward_right[1] - 1]
+                            backward_right = [
+                                backward_right[0] - 1, backward_right[1] - 1]
                             backward_right_alpha = JanggiGame.get_position_from_numbers(backward_right[0],
                                                                                         backward_right[1])
                         # If not check if it is the same team as piece
@@ -1433,7 +1550,8 @@ class Chariot(Piece):
                         if board.is_empty(backward_left_alpha):
                             # If empty, append position and add iteration of move
                             legal_moves.append(backward_left_alpha)
-                            backward_left = [backward_left[0] + 1, backward_left[1] - 1]
+                            backward_left = [
+                                backward_left[0] + 1, backward_left[1] - 1]
                             backward_left_alpha = JanggiGame.get_position_from_numbers(backward_left[0],
                                                                                        backward_left[1])
                         # If not check if it is the same team as piece
@@ -1451,8 +1569,10 @@ class Chariot(Piece):
                         if board.is_empty(forward_left_alpha):
                             # If empty, append position and add iteration of move
                             legal_moves.append(forward_left_alpha)
-                            forward_left = [forward_left[0] + 1, forward_left[1] + 1]
-                            forward_left_alpha = JanggiGame.get_position_from_numbers(forward_left[0], forward_left[1])
+                            forward_left = [
+                                forward_left[0] + 1, forward_left[1] + 1]
+                            forward_left_alpha = JanggiGame.get_position_from_numbers(
+                                forward_left[0], forward_left[1])
                         # If not check if it is the same team as piece
                         elif board.get_position_team(forward_left_alpha) == 'r':
                             # If same team, set move to false
@@ -1469,7 +1589,8 @@ class Chariot(Piece):
                         # If empty append to legal_moves and add another iteration of move and create another alpha version
                         legal_moves.append(forward_move_alpha)
                         forward_move = [forward_move[0], forward_move[1] + 1]
-                        forward_move_alpha = JanggiGame.get_position_from_numbers(forward_move[0], forward_move[1])
+                        forward_move_alpha = JanggiGame.get_position_from_numbers(
+                            forward_move[0], forward_move[1])
                     # If not empty, check team.
                     elif board.get_position_team(forward_move_alpha) == 'r':
                         # If same team, set move to false
@@ -1486,7 +1607,8 @@ class Chariot(Piece):
                         # If empty append to legal_moves and add another iteration of move and create another alpha version
                         legal_moves.append(right_move_alpha)
                         right_move = [right_move[0] - 1, right_move[1]]
-                        right_move_alpha = JanggiGame.get_position_from_numbers(right_move[0], right_move[1])
+                        right_move_alpha = JanggiGame.get_position_from_numbers(
+                            right_move[0], right_move[1])
                     # If not empty, check team.
                     elif board.get_position_team(right_move_alpha) == 'r':
                         # If same team, set move to false
@@ -1502,8 +1624,10 @@ class Chariot(Piece):
                     if board.is_empty(backward_move_alpha):
                         # If empty append to legal_moves and add another iteration of move and create another alpha version
                         legal_moves.append(backward_move_alpha)
-                        backward_move = [backward_move[0], backward_move[1] - 1]
-                        backward_move_alpha = JanggiGame.get_position_from_numbers(backward_move[0], backward_move[1])
+                        backward_move = [
+                            backward_move[0], backward_move[1] - 1]
+                        backward_move_alpha = JanggiGame.get_position_from_numbers(
+                            backward_move[0], backward_move[1])
                     # If not empty, check team.
                     elif board.get_position_team(backward_move_alpha) == 'r':
                         # If same team, set move to false
@@ -1520,7 +1644,8 @@ class Chariot(Piece):
                         # If empty append to legal_moves and add another iteration of move and create another alpha version
                         legal_moves.append(left_move_alpha)
                         left_move = [left_move[0] + 1, left_move[1]]
-                        left_move_alpha = JanggiGame.get_position_from_numbers(left_move[0], left_move[1])
+                        left_move_alpha = JanggiGame.get_position_from_numbers(
+                            left_move[0], left_move[1])
                     # If not empty, check team.
                     elif board.get_position_team(left_move_alpha) == 'r':
                         # If same team, set move to false
@@ -1534,26 +1659,34 @@ class Chariot(Piece):
             # Also set variables to alpha numeric positions
             if self.get_team_color() == 'b':
                 left_move = [self._column_num - 1, self._row_num]
-                left_move_alpha = JanggiGame.get_position_from_numbers(left_move[0], left_move[1])
+                left_move_alpha = JanggiGame.get_position_from_numbers(
+                    left_move[0], left_move[1])
                 right_move = [self._column_num + 1, self._row_num]
-                right_move_alpha = JanggiGame.get_position_from_numbers(right_move[0], right_move[1])
+                right_move_alpha = JanggiGame.get_position_from_numbers(
+                    right_move[0], right_move[1])
                 forward_move = [self._column_num, self._row_num - 1]
-                forward_move_alpha = JanggiGame.get_position_from_numbers(forward_move[0], forward_move[1])
+                forward_move_alpha = JanggiGame.get_position_from_numbers(
+                    forward_move[0], forward_move[1])
                 backward_move = [self._column_num, self._row_num + 1]
-                backward_move_alpha = JanggiGame.get_position_from_numbers(backward_move[0], backward_move[1])
+                backward_move_alpha = JanggiGame.get_position_from_numbers(
+                    backward_move[0], backward_move[1])
 
                 if is_in_diagonal_spaces:
                     # If it is in palace, create variables forward_right, backward_right,
                     # backward_left, forward_left (and alpha versions) that are the current position plus
                     # or minus numbers that would take it diagonally that direction
                     forward_right = [self._column_num + 1, self._row_num - 1]
-                    forward_right_alpha = JanggiGame.get_position_from_numbers(forward_right[0], forward_right[1])
+                    forward_right_alpha = JanggiGame.get_position_from_numbers(
+                        forward_right[0], forward_right[1])
                     backward_right = [self._column_num + 1, self._row_num + 1]
-                    backward_right_alpha = JanggiGame.get_position_from_numbers(backward_right[0], backward_right[1])
+                    backward_right_alpha = JanggiGame.get_position_from_numbers(
+                        backward_right[0], backward_right[1])
                     backward_left = [self._column_num - 1, self._row_num + 1]
-                    backward_left_alpha = JanggiGame.get_position_from_numbers(backward_left[0], backward_left[1])
+                    backward_left_alpha = JanggiGame.get_position_from_numbers(
+                        backward_left[0], backward_left[1])
                     forward_left = [self._column_num - 1, self._row_num - 1]
-                    forward_left_alpha = JanggiGame.get_position_from_numbers(forward_left[0], forward_left[1])
+                    forward_left_alpha = JanggiGame.get_position_from_numbers(
+                        forward_left[0], forward_left[1])
 
                     # while forward right and while forward right alpha is in palace
                     while forward_right_alpha and board.is_in_palace(forward_right_alpha):
@@ -1561,7 +1694,8 @@ class Chariot(Piece):
                         if board.is_empty(forward_right_alpha):
                             # If empty, append position and add iteration of move
                             legal_moves.append(forward_right_alpha)
-                            forward_right = [forward_right[0] + 1, forward_right[1] - 1]
+                            forward_right = [
+                                forward_right[0] + 1, forward_right[1] - 1]
                             forward_right_alpha = JanggiGame.get_position_from_numbers(forward_right[0],
                                                                                        forward_right[1])
                         # If not check if it is the same team as piece
@@ -1579,7 +1713,8 @@ class Chariot(Piece):
                         if board.is_empty(backward_right_alpha):
                             # If empty, append position and add iteration of move
                             legal_moves.append(backward_right_alpha)
-                            backward_right = [backward_right[0] + 1, backward_right[1] + 1]
+                            backward_right = [
+                                backward_right[0] + 1, backward_right[1] + 1]
                             backward_right_alpha = JanggiGame.get_position_from_numbers(backward_right[0],
                                                                                         backward_right[1])
                         # If not check if it is the same team as piece
@@ -1597,7 +1732,8 @@ class Chariot(Piece):
                         if board.is_empty(backward_left_alpha):
                             # If empty, append position and add iteration of move
                             legal_moves.append(backward_left_alpha)
-                            backward_left = [backward_left[0] - 1, backward_left[1] + 1]
+                            backward_left = [
+                                backward_left[0] - 1, backward_left[1] + 1]
                             backward_left_alpha = JanggiGame.get_position_from_numbers(backward_left[0],
                                                                                        backward_left[1])
                         # If not check if it is the same team as piece
@@ -1615,8 +1751,10 @@ class Chariot(Piece):
                         if board.is_empty(forward_left_alpha):
                             # If empty, append position and add iteration of move
                             legal_moves.append(forward_left_alpha)
-                            forward_left = [forward_left[0] - 1, forward_left[1] - 1]
-                            forward_left_alpha = JanggiGame.get_position_from_numbers(forward_left[0], forward_left[1])
+                            forward_left = [
+                                forward_left[0] - 1, forward_left[1] - 1]
+                            forward_left_alpha = JanggiGame.get_position_from_numbers(
+                                forward_left[0], forward_left[1])
                         # If not check if it is the same team as piece
                         elif board.get_position_team(forward_left_alpha) == 'b':
                             # If same team, set move to false
@@ -1633,7 +1771,8 @@ class Chariot(Piece):
                         # If empty append to legal_moves and add another iteration of move and create another alpha version
                         legal_moves.append(forward_move_alpha)
                         forward_move = [forward_move[0], forward_move[1] - 1]
-                        forward_move_alpha = JanggiGame.get_position_from_numbers(forward_move[0], forward_move[1])
+                        forward_move_alpha = JanggiGame.get_position_from_numbers(
+                            forward_move[0], forward_move[1])
                     # If not empty, check team.
                     elif board.get_position_team(forward_move_alpha) == 'b':
                         # If same team, set move to false
@@ -1650,7 +1789,8 @@ class Chariot(Piece):
                         # If empty append to legal_moves and add another iteration of move and create another alpha version
                         legal_moves.append(right_move_alpha)
                         right_move = [right_move[0] + 1, right_move[1]]
-                        right_move_alpha = JanggiGame.get_position_from_numbers(right_move[0], right_move[1])
+                        right_move_alpha = JanggiGame.get_position_from_numbers(
+                            right_move[0], right_move[1])
                     # If not empty, check team.
                     elif board.get_position_team(right_move_alpha) == 'b':
                         # If same team, set move to false
@@ -1666,8 +1806,10 @@ class Chariot(Piece):
                     if board.is_empty(backward_move_alpha):
                         # If empty append to legal_moves and add another iteration of move and create another alpha version
                         legal_moves.append(backward_move_alpha)
-                        backward_move = [backward_move[0], backward_move[1] + 1]
-                        backward_move_alpha = JanggiGame.get_position_from_numbers(backward_move[0], backward_move[1])
+                        backward_move = [
+                            backward_move[0], backward_move[1] + 1]
+                        backward_move_alpha = JanggiGame.get_position_from_numbers(
+                            backward_move[0], backward_move[1])
                     # If not empty, check team.
                     elif board.get_position_team(backward_move_alpha) == 'b':
                         # If same team, set move to false
@@ -1684,7 +1826,8 @@ class Chariot(Piece):
                         # If empty append to legal_moves and add another iteration of move and create another alpha version
                         legal_moves.append(left_move_alpha)
                         left_move = [left_move[0] - 1, left_move[1]]
-                        left_move_alpha = JanggiGame.get_position_from_numbers(left_move[0], left_move[1])
+                        left_move_alpha = JanggiGame.get_position_from_numbers(
+                            left_move[0], left_move[1])
                     # If not empty, check team.
                     elif board.get_position_team(left_move_alpha) == 'b':
                         # If same team, set move to false
@@ -1729,13 +1872,17 @@ class Cannon(Piece):
                 # Create variables forward, right, backward, left (and alpha versions) that are the
                 # current position plus or minus numbers that would take it that direction
                 left_move = [self._column_num + 1, self._row_num]
-                left_move_alpha = JanggiGame.get_position_from_numbers(left_move[0], left_move[1])
+                left_move_alpha = JanggiGame.get_position_from_numbers(
+                    left_move[0], left_move[1])
                 right_move = [self._column_num - 1, self._row_num]
-                right_move_alpha = JanggiGame.get_position_from_numbers(right_move[0], right_move[1])
+                right_move_alpha = JanggiGame.get_position_from_numbers(
+                    right_move[0], right_move[1])
                 forward_move = [self._column_num, self._row_num + 1]
-                forward_move_alpha = JanggiGame.get_position_from_numbers(forward_move[0], forward_move[1])
+                forward_move_alpha = JanggiGame.get_position_from_numbers(
+                    forward_move[0], forward_move[1])
                 backward_move = [self._column_num, self._row_num - 1]
-                backward_move_alpha = JanggiGame.get_position_from_numbers(backward_move[0], backward_move[1])
+                backward_move_alpha = JanggiGame.get_position_from_numbers(
+                    backward_move[0], backward_move[1])
                 # Check if start position is in palace
                 is_in_palace = board.is_in_palace(self.get_position())
 
@@ -1743,13 +1890,17 @@ class Cannon(Piece):
                 # backward_left, forward_left (and alpha versions) that are the current position plus
                 # or minus numbers that would take it diagonally that direction
                 forward_right = [self._column_num - 1, self._row_num + 1]
-                forward_right_alpha = JanggiGame.get_position_from_numbers(forward_right[0], forward_right[1])
+                forward_right_alpha = JanggiGame.get_position_from_numbers(
+                    forward_right[0], forward_right[1])
                 backward_right = [self._column_num - 1, self._row_num - 1]
-                backward_right_alpha = JanggiGame.get_position_from_numbers(backward_right[0], backward_right[1])
+                backward_right_alpha = JanggiGame.get_position_from_numbers(
+                    backward_right[0], backward_right[1])
                 backward_left = [self._column_num + 1, self._row_num - 1]
-                backward_left_alpha = JanggiGame.get_position_from_numbers(backward_left[0], backward_left[1])
+                backward_left_alpha = JanggiGame.get_position_from_numbers(
+                    backward_left[0], backward_left[1])
                 forward_left = [self._column_num + 1, self._row_num + 1]
-                forward_left_alpha = JanggiGame.get_position_from_numbers(forward_left[0], forward_left[1])
+                forward_left_alpha = JanggiGame.get_position_from_numbers(
+                    forward_left[0], forward_left[1])
 
                 # If in palace...
                 if is_in_palace:
@@ -1772,7 +1923,8 @@ class Cannon(Piece):
                             # If not cannon, set jump_piece to True and then iterate again and reset variable alpha
                             else:
                                 jump_piece = True
-                                forward_right = [forward_right[0] - 1, forward_right[1] + 1]
+                                forward_right = [
+                                    forward_right[0] - 1, forward_right[1] + 1]
                                 forward_right_alpha = JanggiGame.get_position_from_numbers(forward_right[0],
                                                                                            forward_right[1])
                         # If jump_piece is True
@@ -1784,8 +1936,8 @@ class Cannon(Piece):
                                 forward_right_alpha = False
                             # If not empty, check if piece occupying is other team OR if piece is cannon
                             elif board.get_piece_in_position(forward_right_alpha).get_initials()[
-                                 1:] == 'cn' or board.get_piece_in_position(
-                                forward_right_alpha).get_team_color() == 'r':
+                                    1:] == 'cn' or board.get_piece_in_position(
+                                    forward_right_alpha).get_team_color() == 'r':
                                 # If piece is one of these, set move to False
                                 forward_right_alpha = False
                             # If piece is not one of those, append move to list and set move to False
@@ -1811,7 +1963,8 @@ class Cannon(Piece):
                             # If not cannon, set jump_piece to True and then iterate again and reset variable alpha
                             else:
                                 jump_piece = True
-                                backward_right = [backward_right[0] - 1, backward_right[1] - 1]
+                                backward_right = [
+                                    backward_right[0] - 1, backward_right[1] - 1]
                                 backward_right_alpha = JanggiGame.get_position_from_numbers(backward_right[0],
                                                                                             backward_right[1])
                         # If jump_piece is True
@@ -1823,8 +1976,8 @@ class Cannon(Piece):
                                 backward_right_alpha = False
                             # If not empty, check if piece occupying is other team OR if piece is cannon
                             elif board.get_piece_in_position(backward_right_alpha).get_initials()[
-                                 1:] == 'cn' or board.get_piece_in_position(
-                                backward_right_alpha).get_team_color() == 'r':
+                                    1:] == 'cn' or board.get_piece_in_position(
+                                    backward_right_alpha).get_team_color() == 'r':
                                 # If piece is one of these, set move to False
                                 backward_right_alpha = False
                             # If piece is not one of those, append move to list and set move to False
@@ -1850,7 +2003,8 @@ class Cannon(Piece):
                             # If not cannon, set jump_piece to True and then iterate again and reset variable alpha
                             else:
                                 jump_piece = True
-                                backward_left = [backward_left[0] + 1, backward_left[1] - 1]
+                                backward_left = [
+                                    backward_left[0] + 1, backward_left[1] - 1]
                                 backward_left_alpha = JanggiGame.get_position_from_numbers(backward_left[0],
                                                                                            backward_left[1])
                         # If jump_piece is True
@@ -1862,8 +2016,8 @@ class Cannon(Piece):
                                 backward_left_alpha = False
                             # If not empty, check if piece occupying is other team OR if piece is cannon
                             elif board.get_piece_in_position(backward_left_alpha).get_initials()[
-                                 1:] == 'cn' or board.get_piece_in_position(
-                                backward_left_alpha).get_team_color() == 'r':
+                                    1:] == 'cn' or board.get_piece_in_position(
+                                    backward_left_alpha).get_team_color() == 'r':
                                 # If piece is one of these, set move to False
                                 backward_left_alpha = False
                             # If piece is not one of those, append move to list and set move to False
@@ -1889,7 +2043,8 @@ class Cannon(Piece):
                             # If not cannon, set jump_piece to True and then iterate again and reset variable alpha
                             else:
                                 jump_piece = True
-                                forward_left = [forward_left[0] + 1, forward_left[1] + 1]
+                                forward_left = [
+                                    forward_left[0] + 1, forward_left[1] + 1]
                                 forward_left_alpha = JanggiGame.get_position_from_numbers(forward_left[0],
                                                                                           forward_left[1])
                         # If jump_piece is True
@@ -1901,7 +2056,7 @@ class Cannon(Piece):
                                 forward_left_alpha = False
                             # If not empty, check if piece occupying is other team OR if piece is cannon
                             elif board.get_piece_in_position(forward_left_alpha).get_initials()[
-                                 1:] == 'cn' or board.get_piece_in_position(forward_left_alpha).get_team_color() == 'r':
+                                    1:] == 'cn' or board.get_piece_in_position(forward_left_alpha).get_team_color() == 'r':
                                 # If piece is one of these, set move to False
                                 forward_left_alpha = False
                             # If piece is not one of those, append move to list and set move to False
@@ -1918,8 +2073,10 @@ class Cannon(Piece):
                         # Check if empty
                         if board.is_empty(forward_move_alpha):
                             # If empty, iterate again, set new alpha
-                            forward_move = [forward_move[0], forward_move[1] + 1]
-                            forward_move_alpha = JanggiGame.get_position_from_numbers(forward_move[0], forward_move[1])
+                            forward_move = [
+                                forward_move[0], forward_move[1] + 1]
+                            forward_move_alpha = JanggiGame.get_position_from_numbers(
+                                forward_move[0], forward_move[1])
                         # If not empty, check to see if piece is a cannon (use board's get piece from position method,
                         # then use Piece's get initials method and check if last two characters are 'cn')
                         elif board.get_piece_in_position(forward_move_alpha).get_initials()[1:] == 'cn':
@@ -1928,20 +2085,24 @@ class Cannon(Piece):
                         # If not cannon, set jump_piece to True and then iterate again and reset variable alpha
                         else:
                             jump_piece = True
-                            forward_move = [forward_move[0], forward_move[1] + 1]
-                            forward_move_alpha = JanggiGame.get_position_from_numbers(forward_move[0], forward_move[1])
+                            forward_move = [
+                                forward_move[0], forward_move[1] + 1]
+                            forward_move_alpha = JanggiGame.get_position_from_numbers(
+                                forward_move[0], forward_move[1])
                     # If jump_piece is True
                     else:
                         # Check if empty
                         if board.is_empty(forward_move_alpha):
                             # If empty, append position alpha to list. Then iterate again and set new alpha
                             legal_moves.append(forward_move_alpha)
-                            forward_move = [forward_move[0], forward_move[1] + 1]
-                            forward_move_alpha = JanggiGame.get_position_from_numbers(forward_move[0], forward_move[1])
+                            forward_move = [
+                                forward_move[0], forward_move[1] + 1]
+                            forward_move_alpha = JanggiGame.get_position_from_numbers(
+                                forward_move[0], forward_move[1])
 
                         # If not empty, check if piece occupying is other team OR if piece is cannon
                         elif board.get_piece_in_position(forward_move_alpha).get_initials()[
-                             1:] == 'cn' or board.get_piece_in_position(forward_move_alpha).get_team_color() == 'r':
+                                1:] == 'cn' or board.get_piece_in_position(forward_move_alpha).get_team_color() == 'r':
                             # If piece is one of these, set move to False
                             forward_move_alpha = False
                             # If piece is not one of those, append move to list and set move to False
@@ -1960,7 +2121,8 @@ class Cannon(Piece):
                         if board.is_empty(right_move_alpha):
                             # If empty, iterate again, set new alpha
                             right_move = [right_move[0] - 1, right_move[1]]
-                            right_move_alpha = JanggiGame.get_position_from_numbers(right_move[0], right_move[1])
+                            right_move_alpha = JanggiGame.get_position_from_numbers(
+                                right_move[0], right_move[1])
                         # If not empty, check to see if piece is a cannon (use board's get piece from position method,
                         # then use Piece's get initials method and check if last two characters are 'cn')
                         elif board.get_piece_in_position(right_move_alpha).get_initials()[1:] == 'cn':
@@ -1970,7 +2132,8 @@ class Cannon(Piece):
                         else:
                             jump_piece = True
                             right_move = [right_move[0] - 1, right_move[1]]
-                            right_move_alpha = JanggiGame.get_position_from_numbers(right_move[0], right_move[1])
+                            right_move_alpha = JanggiGame.get_position_from_numbers(
+                                right_move[0], right_move[1])
                     # If jump_piece is True
                     else:
                         # Check if empty
@@ -1978,11 +2141,12 @@ class Cannon(Piece):
                             # If empty, append position alpha to list. Then iterate again and set new alpha
                             legal_moves.append(right_move_alpha)
                             right_move = [right_move[0] - 1, right_move[1]]
-                            right_move_alpha = JanggiGame.get_position_from_numbers(right_move[0], right_move[1])
+                            right_move_alpha = JanggiGame.get_position_from_numbers(
+                                right_move[0], right_move[1])
 
                         # If not empty, check if piece occupying is other team OR if piece is cannon
                         elif board.get_piece_in_position(right_move_alpha).get_initials()[
-                             1:] == 'cn' or board.get_piece_in_position(right_move_alpha).get_team_color() == 'r':
+                                1:] == 'cn' or board.get_piece_in_position(right_move_alpha).get_team_color() == 'r':
                             # If piece is one of these, set move to False
                             right_move_alpha = False
                             # If piece is not one of those, append move to list and set move to False
@@ -2000,7 +2164,8 @@ class Cannon(Piece):
                         # Check if empty
                         if board.is_empty(backward_move_alpha):
                             # If empty, iterate again, set new alpha
-                            backward_move = [backward_move[0], backward_move[1] + 1]
+                            backward_move = [
+                                backward_move[0], backward_move[1] + 1]
                             backward_move_alpha = JanggiGame.get_position_from_numbers(backward_move[0],
                                                                                        backward_move[1])
                         # If not empty, check to see if piece is a cannon (use board's get piece from position method,
@@ -2011,7 +2176,8 @@ class Cannon(Piece):
                         # If not cannon, set jump_piece to True and then iterate again and reset variable alpha
                         else:
                             jump_piece = True
-                            backward_move = [backward_move[0], backward_move[1] + 1]
+                            backward_move = [
+                                backward_move[0], backward_move[1] + 1]
                             backward_move_alpha = JanggiGame.get_position_from_numbers(backward_move[0],
                                                                                        backward_move[1])
                     # If jump_piece is True
@@ -2020,13 +2186,14 @@ class Cannon(Piece):
                         if board.is_empty(backward_move_alpha):
                             # If empty, append position alpha to list. Then iterate again and set new alpha
                             legal_moves.append(backward_move_alpha)
-                            backward_move = [backward_move[0], backward_move[1] + 1]
+                            backward_move = [
+                                backward_move[0], backward_move[1] + 1]
                             backward_move_alpha = JanggiGame.get_position_from_numbers(backward_move[0],
                                                                                        backward_move[1])
 
                         # If not empty, check if piece occupying is other team OR if piece is cannon
                         elif board.get_piece_in_position(backward_move_alpha).get_initials()[
-                             1:] == 'cn' or board.get_piece_in_position(backward_move_alpha).get_team_color() == 'r':
+                                1:] == 'cn' or board.get_piece_in_position(backward_move_alpha).get_team_color() == 'r':
                             # If piece is one of these, set move to False
                             backward_move_alpha = False
                             # If piece is not one of those, append move to list and set move to False
@@ -2045,7 +2212,8 @@ class Cannon(Piece):
                         if board.is_empty(left_move_alpha):
                             # If empty, iterate again, set new alpha
                             left_move = [left_move[0] + 1, left_move[1]]
-                            left_move_alpha = JanggiGame.get_position_from_numbers(left_move[0], left_move[1])
+                            left_move_alpha = JanggiGame.get_position_from_numbers(
+                                left_move[0], left_move[1])
                         # If not empty, check to see if piece is a cannon (use board's get piece from position method,
                         # then use Piece's get initials method and check if last two characters are 'cn')
                         elif board.get_piece_in_position(left_move_alpha).get_initials()[1:] == 'cn':
@@ -2055,7 +2223,8 @@ class Cannon(Piece):
                         else:
                             jump_piece = True
                             left_move = [left_move[0] + 1, left_move[1]]
-                            left_move_alpha = JanggiGame.get_position_from_numbers(left_move[0], left_move[1])
+                            left_move_alpha = JanggiGame.get_position_from_numbers(
+                                left_move[0], left_move[1])
                     # If jump_piece is True
                     else:
                         # Check if empty
@@ -2063,11 +2232,12 @@ class Cannon(Piece):
                             # If empty, append position alpha to list. Then iterate again and set new alpha
                             legal_moves.append(left_move_alpha)
                             left_move = [left_move[0] + 1, left_move[1]]
-                            left_move_alpha = JanggiGame.get_position_from_numbers(left_move[0], left_move[1])
+                            left_move_alpha = JanggiGame.get_position_from_numbers(
+                                left_move[0], left_move[1])
 
                         # If not empty, check if piece occupying is other team OR if piece is cannon
                         elif board.get_piece_in_position(left_move_alpha).get_initials()[
-                             1:] == 'cn' or board.get_piece_in_position(left_move_alpha).get_team_color() == 'r':
+                                1:] == 'cn' or board.get_piece_in_position(left_move_alpha).get_team_color() == 'r':
                             # If piece is one of these, set move to False
                             left_move_alpha = False
                             # If piece is not one of those, append move to list and set move to False
@@ -2081,13 +2251,17 @@ class Cannon(Piece):
                 # Create variables forward, right, backward, left (and alpha versions) that are the
                 # current position plus or minus numbers that would take it that direction
                 left_move = [self._column_num - 1, self._row_num]
-                left_move_alpha = JanggiGame.get_position_from_numbers(left_move[0], left_move[1])
+                left_move_alpha = JanggiGame.get_position_from_numbers(
+                    left_move[0], left_move[1])
                 right_move = [self._column_num + 1, self._row_num]
-                right_move_alpha = JanggiGame.get_position_from_numbers(right_move[0], right_move[1])
+                right_move_alpha = JanggiGame.get_position_from_numbers(
+                    right_move[0], right_move[1])
                 forward_move = [self._column_num, self._row_num - 1]
-                forward_move_alpha = JanggiGame.get_position_from_numbers(forward_move[0], forward_move[1])
+                forward_move_alpha = JanggiGame.get_position_from_numbers(
+                    forward_move[0], forward_move[1])
                 backward_move = [self._column_num, self._row_num + 1]
-                backward_move_alpha = JanggiGame.get_position_from_numbers(backward_move[0], backward_move[1])
+                backward_move_alpha = JanggiGame.get_position_from_numbers(
+                    backward_move[0], backward_move[1])
                 # Check if start position is in palace
                 is_in_palace = board.is_in_palace(self.get_position())
 
@@ -2095,13 +2269,17 @@ class Cannon(Piece):
                 # backward_left, forward_left (and alpha versions) that are the current position plus
                 # or minus numbers that would take it diagonally that direction
                 forward_right = [self._column_num + 1, self._row_num - 1]
-                forward_right_alpha = JanggiGame.get_position_from_numbers(forward_right[0], forward_right[1])
+                forward_right_alpha = JanggiGame.get_position_from_numbers(
+                    forward_right[0], forward_right[1])
                 backward_right = [self._column_num + 1, self._row_num + 1]
-                backward_right_alpha = JanggiGame.get_position_from_numbers(backward_right[0], backward_right[1])
+                backward_right_alpha = JanggiGame.get_position_from_numbers(
+                    backward_right[0], backward_right[1])
                 backward_left = [self._column_num - 1, self._row_num + 1]
-                backward_left_alpha = JanggiGame.get_position_from_numbers(backward_left[0], backward_left[1])
+                backward_left_alpha = JanggiGame.get_position_from_numbers(
+                    backward_left[0], backward_left[1])
                 forward_left = [self._column_num - 1, self._row_num - 1]
-                forward_left_alpha = JanggiGame.get_position_from_numbers(forward_left[0], forward_left[1])
+                forward_left_alpha = JanggiGame.get_position_from_numbers(
+                    forward_left[0], forward_left[1])
 
                 # If in palace...
                 if is_in_palace:
@@ -2124,7 +2302,8 @@ class Cannon(Piece):
                             # If not cannon, set jump_piece to True and then iterate again and reset variable alpha
                             else:
                                 jump_piece = True
-                                forward_right = [forward_right[0] + 1, forward_right[1] - 1]
+                                forward_right = [
+                                    forward_right[0] + 1, forward_right[1] - 1]
                                 forward_right_alpha = JanggiGame.get_position_from_numbers(forward_right[0],
                                                                                            forward_right[1])
                         # If jump_piece is True
@@ -2136,8 +2315,8 @@ class Cannon(Piece):
                                 forward_right_alpha = False
                             # If not empty, check if piece occupying is other team OR if piece is cannon
                             elif board.get_piece_in_position(forward_right_alpha).get_initials()[
-                                 1:] == 'cn' or board.get_piece_in_position(
-                                forward_right_alpha).get_team_color() == 'b':
+                                    1:] == 'cn' or board.get_piece_in_position(
+                                    forward_right_alpha).get_team_color() == 'b':
                                 # If piece is one of these, set move to False
                                 forward_right_alpha = False
                             # If piece is not one of those, append move to list and set move to False
@@ -2163,7 +2342,8 @@ class Cannon(Piece):
                             # If not cannon, set jump_piece to True and then iterate again and reset variable alpha
                             else:
                                 jump_piece = True
-                                backward_right = [backward_right[0] + 1, backward_right[1] + 1]
+                                backward_right = [
+                                    backward_right[0] + 1, backward_right[1] + 1]
                                 backward_right_alpha = JanggiGame.get_position_from_numbers(backward_right[0],
                                                                                             backward_right[1])
                         # If jump_piece is True
@@ -2175,8 +2355,8 @@ class Cannon(Piece):
                                 backward_right_alpha = False
                             # If not empty, check if piece occupying is other team OR if piece is cannon
                             elif board.get_piece_in_position(backward_right_alpha).get_initials()[
-                                 1:] == 'cn' or board.get_piece_in_position(
-                                backward_right_alpha).get_team_color() == 'b':
+                                    1:] == 'cn' or board.get_piece_in_position(
+                                    backward_right_alpha).get_team_color() == 'b':
                                 # If piece is one of these, set move to False
                                 backward_right_alpha = False
                             # If piece is not one of those, append move to list and set move to False
@@ -2202,7 +2382,8 @@ class Cannon(Piece):
                             # If not cannon, set jump_piece to True and then iterate again and reset variable alpha
                             else:
                                 jump_piece = True
-                                backward_left = [backward_left[0] - 1, backward_left[1] + 1]
+                                backward_left = [
+                                    backward_left[0] - 1, backward_left[1] + 1]
                                 backward_left_alpha = JanggiGame.get_position_from_numbers(backward_left[0],
                                                                                            backward_left[1])
                         # If jump_piece is True
@@ -2214,8 +2395,8 @@ class Cannon(Piece):
                                 backward_left_alpha = False
                             # If not empty, check if piece occupying is other team OR if piece is cannon
                             elif board.get_piece_in_position(backward_left_alpha).get_initials()[
-                                 1:] == 'cn' or board.get_piece_in_position(
-                                backward_left_alpha).get_team_color() == 'b':
+                                    1:] == 'cn' or board.get_piece_in_position(
+                                    backward_left_alpha).get_team_color() == 'b':
                                 # If piece is one of these, set move to False
                                 backward_left_alpha = False
                             # If piece is not one of those, append move to list and set move to False
@@ -2241,7 +2422,8 @@ class Cannon(Piece):
                             # If not cannon, set jump_piece to True and then iterate again and reset variable alpha
                             else:
                                 jump_piece = True
-                                forward_left = [forward_left[0] - 1, forward_left[1] - 1]
+                                forward_left = [
+                                    forward_left[0] - 1, forward_left[1] - 1]
                                 forward_left_alpha = JanggiGame.get_position_from_numbers(forward_left[0],
                                                                                           forward_left[1])
                         # If jump_piece is True
@@ -2253,7 +2435,7 @@ class Cannon(Piece):
                                 forward_left_alpha = False
                             # If not empty, check if piece occupying is other team OR if piece is cannon
                             elif board.get_piece_in_position(forward_left_alpha).get_initials()[
-                                 1:] == 'cn' or board.get_piece_in_position(forward_left_alpha).get_team_color() == 'b':
+                                    1:] == 'cn' or board.get_piece_in_position(forward_left_alpha).get_team_color() == 'b':
                                 # If piece is one of these, set move to False
                                 forward_left_alpha = False
                             # If piece is not one of those, append move to list and set move to False
@@ -2270,8 +2452,10 @@ class Cannon(Piece):
                         # Check if empty
                         if board.is_empty(forward_move_alpha):
                             # If empty, iterate again, set new alpha
-                            forward_move = [forward_move[0], forward_move[1] - 1]
-                            forward_move_alpha = JanggiGame.get_position_from_numbers(forward_move[0], forward_move[1])
+                            forward_move = [
+                                forward_move[0], forward_move[1] - 1]
+                            forward_move_alpha = JanggiGame.get_position_from_numbers(
+                                forward_move[0], forward_move[1])
                         # If not empty, check to see if piece is a cannon (use board's get piece from position method,
                         # then use Piece's get initials method and check if last two characters are 'cn')
                         elif board.get_piece_in_position(forward_move_alpha).get_initials()[1:] == 'cn':
@@ -2280,20 +2464,24 @@ class Cannon(Piece):
                         # If not cannon, set jump_piece to True and then iterate again and reset variable alpha
                         else:
                             jump_piece = True
-                            forward_move = [forward_move[0], forward_move[1] - 1]
-                            forward_move_alpha = JanggiGame.get_position_from_numbers(forward_move[0], forward_move[1])
+                            forward_move = [
+                                forward_move[0], forward_move[1] - 1]
+                            forward_move_alpha = JanggiGame.get_position_from_numbers(
+                                forward_move[0], forward_move[1])
                     # If jump_piece is True
                     else:
                         # Check if empty
                         if board.is_empty(forward_move_alpha):
                             # If empty, append position alpha to list. Then iterate again and set new alpha
                             legal_moves.append(forward_move_alpha)
-                            forward_move = [forward_move[0], forward_move[1] - 1]
-                            forward_move_alpha = JanggiGame.get_position_from_numbers(forward_move[0], forward_move[1])
+                            forward_move = [
+                                forward_move[0], forward_move[1] - 1]
+                            forward_move_alpha = JanggiGame.get_position_from_numbers(
+                                forward_move[0], forward_move[1])
 
                         # If not empty, check if piece occupying is other team OR if piece is cannon
                         elif board.get_piece_in_position(forward_move_alpha).get_initials()[
-                             1:] == 'cn' or board.get_piece_in_position(forward_move_alpha).get_team_color() == 'b':
+                                1:] == 'cn' or board.get_piece_in_position(forward_move_alpha).get_team_color() == 'b':
                             # If piece is one of these, set move to False
                             forward_move_alpha = False
                             # If piece is not one of those, append move to list and set move to False
@@ -2312,7 +2500,8 @@ class Cannon(Piece):
                         if board.is_empty(right_move_alpha):
                             # If empty, iterate again, set new alpha
                             right_move = [right_move[0] + 1, right_move[1]]
-                            right_move_alpha = JanggiGame.get_position_from_numbers(right_move[0], right_move[1])
+                            right_move_alpha = JanggiGame.get_position_from_numbers(
+                                right_move[0], right_move[1])
                         # If not empty, check to see if piece is a cannon (use board's get piece from position method,
                         # then use Piece's get initials method and check if last two characters are 'cn')
                         elif board.get_piece_in_position(right_move_alpha).get_initials()[1:] == 'cn':
@@ -2322,7 +2511,8 @@ class Cannon(Piece):
                         else:
                             jump_piece = True
                             right_move = [right_move[0] + 1, right_move[1]]
-                            right_move_alpha = JanggiGame.get_position_from_numbers(right_move[0], right_move[1])
+                            right_move_alpha = JanggiGame.get_position_from_numbers(
+                                right_move[0], right_move[1])
                     # If jump_piece is True
                     else:
                         # Check if empty
@@ -2330,11 +2520,12 @@ class Cannon(Piece):
                             # If empty, append position alpha to list. Then iterate again and set new alpha
                             legal_moves.append(right_move_alpha)
                             right_move = [right_move[0] + 1, right_move[1]]
-                            right_move_alpha = JanggiGame.get_position_from_numbers(right_move[0], right_move[1])
+                            right_move_alpha = JanggiGame.get_position_from_numbers(
+                                right_move[0], right_move[1])
 
                         # If not empty, check if piece occupying is other team OR if piece is cannon
                         elif board.get_piece_in_position(right_move_alpha).get_initials()[
-                             1:] == 'cn' or board.get_piece_in_position(right_move_alpha).get_team_color() == 'b':
+                                1:] == 'cn' or board.get_piece_in_position(right_move_alpha).get_team_color() == 'b':
                             # If piece is one of these, set move to False
                             right_move_alpha = False
                             # If piece is not one of those, append move to list and set move to False
@@ -2352,7 +2543,8 @@ class Cannon(Piece):
                         # Check if empty
                         if board.is_empty(backward_move_alpha):
                             # If empty, iterate again, set new alpha
-                            backward_move = [backward_move[0], backward_move[1] - 1]
+                            backward_move = [
+                                backward_move[0], backward_move[1] - 1]
                             backward_move_alpha = JanggiGame.get_position_from_numbers(backward_move[0],
                                                                                        backward_move[1])
                         # If not empty, check to see if piece is a cannon (use board's get piece from position method,
@@ -2363,7 +2555,8 @@ class Cannon(Piece):
                         # If not cannon, set jump_piece to True and then iterate again and reset variable alpha
                         else:
                             jump_piece = True
-                            backward_move = [backward_move[0], backward_move[1] - 1]
+                            backward_move = [
+                                backward_move[0], backward_move[1] - 1]
                             backward_move_alpha = JanggiGame.get_position_from_numbers(backward_move[0],
                                                                                        backward_move[1])
                     # If jump_piece is True
@@ -2372,13 +2565,14 @@ class Cannon(Piece):
                         if board.is_empty(backward_move_alpha):
                             # If empty, append position alpha to list. Then iterate again and set new alpha
                             legal_moves.append(backward_move_alpha)
-                            backward_move = [backward_move[0], backward_move[1] - 1]
+                            backward_move = [
+                                backward_move[0], backward_move[1] - 1]
                             backward_move_alpha = JanggiGame.get_position_from_numbers(backward_move[0],
                                                                                        backward_move[1])
 
                         # If not empty, check if piece occupying is other team OR if piece is cannon
                         elif board.get_piece_in_position(backward_move_alpha).get_initials()[
-                             1:] == 'cn' or board.get_piece_in_position(backward_move_alpha).get_team_color() == 'b':
+                                1:] == 'cn' or board.get_piece_in_position(backward_move_alpha).get_team_color() == 'b':
                             # If piece is one of these, set move to False
                             backward_move_alpha = False
                             # If piece is not one of those, append move to list and set move to False
@@ -2397,7 +2591,8 @@ class Cannon(Piece):
                         if board.is_empty(left_move_alpha):
                             # If empty, iterate again, set new alpha
                             left_move = [left_move[0] - 1, left_move[1]]
-                            left_move_alpha = JanggiGame.get_position_from_numbers(left_move[0], left_move[1])
+                            left_move_alpha = JanggiGame.get_position_from_numbers(
+                                left_move[0], left_move[1])
                         # If not empty, check to see if piece is a cannon (use board's get piece from position method,
                         # then use Piece's get initials method and check if last two characters are 'cn')
                         elif board.get_piece_in_position(left_move_alpha).get_initials()[1:] == 'cn':
@@ -2407,7 +2602,8 @@ class Cannon(Piece):
                         else:
                             jump_piece = True
                             left_move = [left_move[0] - 1, left_move[1]]
-                            left_move_alpha = JanggiGame.get_position_from_numbers(left_move[0], left_move[1])
+                            left_move_alpha = JanggiGame.get_position_from_numbers(
+                                left_move[0], left_move[1])
                     # If jump_piece is True
                     else:
                         # Check if empty
@@ -2415,11 +2611,12 @@ class Cannon(Piece):
                             # If empty, append position alpha to list. Then iterate again and set new alpha
                             legal_moves.append(left_move_alpha)
                             left_move = [left_move[0] - 1, left_move[1]]
-                            left_move_alpha = JanggiGame.get_position_from_numbers(left_move[0], left_move[1])
+                            left_move_alpha = JanggiGame.get_position_from_numbers(
+                                left_move[0], left_move[1])
 
                         # If not empty, check if piece occupying is other team OR if piece is cannon
                         elif board.get_piece_in_position(left_move_alpha).get_initials()[
-                             1:] == 'cn' or board.get_piece_in_position(left_move_alpha).get_team_color() == 'b':
+                                1:] == 'cn' or board.get_piece_in_position(left_move_alpha).get_team_color() == 'b':
                             # If piece is one of these, set move to False
                             left_move_alpha = False
                             # If piece is not one of those, append move to list and set move to False
@@ -2474,8 +2671,10 @@ class Soldier(Piece):
                 if in_palace:
                     diagonal_right = [self._column_num - 1, self._row_num + 1]
                     diagonal_left = [self._column_num + 1, self._row_num + 1]
-                    diagonal_right_alpha = JanggiGame.get_position_from_numbers(diagonal_right[0], diagonal_right[1])
-                    diagonal_left_alpha = JanggiGame.get_position_from_numbers(diagonal_left[0], diagonal_left[1])
+                    diagonal_right_alpha = JanggiGame.get_position_from_numbers(
+                        diagonal_right[0], diagonal_right[1])
+                    diagonal_left_alpha = JanggiGame.get_position_from_numbers(
+                        diagonal_left[0], diagonal_left[1])
                     if board.is_in_palace(diagonal_right_alpha):
                         test_moves.append(diagonal_right)
                     if board.is_in_palace(diagonal_left_alpha):
@@ -2491,7 +2690,8 @@ class Soldier(Piece):
                             i = None
                         # If both of these tests passed, append to list
                         else:
-                            legal_moves.append(JanggiGame.get_position_from_numbers(i[0], i[1]))
+                            legal_moves.append(
+                                JanggiGame.get_position_from_numbers(i[0], i[1]))
 
             # Moves one space left or right, or one space forward only unless in palace
             if self.get_team_color() == 'b':
@@ -2504,8 +2704,10 @@ class Soldier(Piece):
                 if in_palace:
                     diagonal_right = [self._column_num + 1, self._row_num - 1]
                     diagonal_left = [self._column_num - 1, self._row_num - 1]
-                    diagonal_right_alpha = JanggiGame.get_position_from_numbers(diagonal_right[0], diagonal_right[1])
-                    diagonal_left_alpha = JanggiGame.get_position_from_numbers(diagonal_left[0], diagonal_left[1])
+                    diagonal_right_alpha = JanggiGame.get_position_from_numbers(
+                        diagonal_right[0], diagonal_right[1])
+                    diagonal_left_alpha = JanggiGame.get_position_from_numbers(
+                        diagonal_left[0], diagonal_left[1])
                     if board.is_in_palace(diagonal_right_alpha):
                         test_moves.append(diagonal_right)
                     if board.is_in_palace(diagonal_left_alpha):
@@ -2521,7 +2723,8 @@ class Soldier(Piece):
                             i = None
                         # If both of these tests passed, append to list
                         else:
-                            legal_moves.append(JanggiGame.get_position_from_numbers(i[0], i[1]))
+                            legal_moves.append(
+                                JanggiGame.get_position_from_numbers(i[0], i[1]))
             # Add starting position to legal_moves list so that skipping turn is an option
             legal_moves.append(self._position)
             # Create dictionary with key starting_position, values legal moves
